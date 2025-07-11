@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Weather Visualizer</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e6e6e7be;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#weather-box {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    min-width: 320px;
+    max-width: 800px;
+    transform: translateY(0);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#weather-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+    animation: slideInDown 0.8s ease-out;
+}
+
+#weather-text {
+    color: #34495e;
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    min-height: 30px;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.3s forwards;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+#weather-icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    display: block;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+#weather-icon.show {
+    opacity: 1;
+    transform: scale(1);
+    animation: bounce 0.6s ease-out;
+}
+
+#weather-icon:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.loading {
+    color: #7f8c8d;
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    animation: loadingDots 1.5s infinite;
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 53%, 80%, 100% {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    40%, 43% {
+        transform: translate3d(0, -8px, 0) scale(1.05);
+    }
+    70% {
+        transform: translate3d(0, -4px, 0) scale(1.02);
+    }
+    90% {
+        transform: translate3d(0, -2px, 0) scale(1.01);
+    }
+}
+
+@keyframes loadingDots {
+    0%, 20% {
+        content: '.';
+    }
+    40% {
+        content: '..';
+    }
+    60%, 100% {
+        content: '...';
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.error {
+    color: #e74c3c;
+    font-weight: 500;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    #weather-box {
+        padding: 30px 20px;
+        margin: 10px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    #weather-text {
+        font-size: 1.1rem;
+    }
+    
+    #weather-icon {
+        width: 100px;
+        height: 100px;
+    }
+}
+</style>
+</head>
+<body>
+<div id="weather-box">
+<h1>🌤️ Current Weather</h1>
+<p id="weather-text" class="loading">Loading</p>
+<img id="weather-icon" src="" alt="" hidden>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

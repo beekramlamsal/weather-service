@@ -1,4 +1,4 @@
-addr: ":5000"
+addr: ":5050"
 locations_url: "https://locations.patch3s.dev/api/random"
 nws_point_url_tmpl: "https://api.weather.gov/points/%f,%f"
 timeout: 15s

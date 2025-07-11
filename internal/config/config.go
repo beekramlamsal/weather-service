@@ -9,7 +9,7 @@ import (
 
 // Config holds all the service configuration values loaded from config.yaml
 type Config struct {
-	Addr            string        `yaml:"addr"`               // Address and port the server will listen on (e.g. ":5000")
+	Addr            string        `yaml:"addr"`               // Address and port the server will listen
 	LocationsURL    string        `yaml:"locations_url"`      // URL for fetching random location
 	NWSPointURLTmpl string        `yaml:"nws_point_url_tmpl"` // Template URL to get NWS forecast endpoint for given lat/lon
 	Timeout         time.Duration `yaml:"timeout"`            // HTTP client timeout duration
