@@ -48,7 +48,6 @@ You can also check the health endpoint:
 
 ```
 curl http://localhost:5000/healthz
-# → ok
 ```
 
 ---
@@ -68,4 +67,73 @@ They include:
 
 ---
 
+# TODOs for Production Readiness
+
+This service covers the critical pieces of functionality, but there are a few areas I would prioritize next to make this truly production-ready:
+
+---
+
+## Error Resilience & Retries
+
+- [ ] Add circuit breaker pattern to avoid hammering upstream APIs when they’re down
+- [ ] Use exponential backoff with jitter for retries (currently fixed delay)
+- [ ] Support fallback (e.g. cached or static responses) when upstream is unavailable
+
+---
+
+## Observability
+
+- [ ] Add structured logging (e.g. zap or zerolog) instead of standard log.Println
+- [ ] Add Prometheus metrics for:
+  - Request/response time
+  - Error count per upstream
+  - Retry attempts
+- [ ] Add tracing support (OpenTelemetry / Jaeger) to trace calls across services
+
+---
+
+## Security
+
+- [ ] Use HTTPS in production (via reverse proxy or direct TLS support)
+- [ ] Sanitize any downstream responses used in output
+- [ ] Validate inputs and headers more strictly if user input is added later
+
+---
+
+## Deployment & Scaling
+
+- [ ] Add readiness and liveness probes to deployment spec
+- [ ] Use a production-grade logger that writes to stdout with timestamps for container logs
+- [ ] Add horizontal pod autoscaler config (HPA) based on CPU or latency
+
+---
+
+## Config and Secrets
+
+- [ ] Support environment variable overrides (e.g. `CONFIG_PATH`, or config via ENV)
+- [ ] Add secret handling for future private APIs (if required)
+
+---
+
+## CI/CD & Testing
+
+- [ ] Add GitHub Actions workflow for:
+  - Linting (golangci-lint)
+  - Running tests on PR
+  - Build & push Docker image
+- [ ] Add integration tests for `/api` handler using `httptest`
+- [ ] Add load test profile using `k6` or `wrk`
+
+---
+
+## Frontend UX (if extended)
+
+- [ ] Improve weather icon logic to prioritize first sentence and confidence words
+- [ ] Handle empty or malformed forecasts gracefully on frontend
+
+---
+
+### Notes
+
+I've intentionally written this codebase with modularity and testability in mind, so extending any of these should be relatively straightforward. Prioritization would depend on expected load, failure tolerance, and security needs in production.
 
