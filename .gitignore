@@ -1,0 +1,37 @@
+# Go build output
+/bin/
+/build/
+/dist/
+*.exe
+*.test
+*.out
+
+# Dependency directories
+vendor/
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Config override or local environment
+.env
+*.local.yaml
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.swp
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Frontend cache/output
+frontend/node_modules/
+frontend/.DS_Store
+frontend/dist/
+
+# Test output
+coverage/
+test-results/
+playwright-report/
